@@ -1,5 +1,5 @@
 import { NavigationBar } from '@/components/common/NavigationBar';
-// import { PrecautionList } from '@/components/home/PrecautionList';
+import { PrecautionList } from '@/components/home/PrecautionList';
 
 export const Home = () => {
   return (
@@ -9,7 +9,7 @@ export const Home = () => {
         <span>확인해보세요!</span>
       </div>
       <NavigationBar />
-      {/* <PrecautionList /> */}
+      <PrecautionList />
     </>
   );
 };
