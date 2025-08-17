@@ -23,7 +23,7 @@ export const ContractPrecaution = ({ precautions }: PrecautionProps) => {
                 >
                   <AccordionTrigger className="items-center">{item.trigger}</AccordionTrigger>
                   <AccordionContent className="flex flex-col items-start gap-4 text-[14px]">
-                    <div className=" w-full border-t-1 border-bgcolor" />
+                    <div className=" w-full border-t-1 border-divider-gray" />
                     {item.checkPoints && (
                       <div className="flex flex-col gap-1 w-full">
                         {item.checkPoints.map((checkPoint, checkPointIdx) => (
@@ -48,9 +48,7 @@ export const ContractPrecaution = ({ precautions }: PrecautionProps) => {
                                 >
                                   <div className="flex flex-col gap-[1px]">
                                     {list.description && (
-                                      <span className="text-[#666666] font-semibold text-[12px]">
-                                        {list.description}
-                                      </span>
+                                      <span className="text-gray-2 font-semibold text-[12px]">{list.description}</span>
                                     )}
                                     <span className="font-semibold">{list.title}</span>
                                   </div>
@@ -81,7 +79,7 @@ export const ContractPrecaution = ({ precautions }: PrecautionProps) => {
                             <>
                               <div className="flex flex-col items-start gap-1">
                                 <span className="font-semibold">{content.title}</span>
-                                <span className="text-[#666666] text-[12px]">{content.description}</span>
+                                <span className="text-gray-2 text-[12px]">{content.description}</span>
                               </div>
 
                               <Link

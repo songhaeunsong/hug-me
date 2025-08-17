@@ -31,7 +31,7 @@ export const ContractCheckList = () => {
               size="sm"
               variant="transparent"
               className={cn(
-                active ? ' border-[#1c1b1f] text-[#1c1b1f]' : 'text-[#999999] border-transparent',
+                active ? ' border-dark text-dark' : 'text-gray-1 border-transparent',
                 'pb-2 font-semibold border-b-3',
               )}
               onClick={() => handleClickPrecautionMenu(key)}
