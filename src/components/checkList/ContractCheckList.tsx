@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { cn } from '@/lib/utils';
 
-import { PRECAUTION_MENUS } from '../home/PrecautionList';
+import { PRECAUTION_MENUS, type PrecautionMenuType } from '../home/PrecautionList';
 import { Button } from '../ui/button';
 import {
   AFTER_CONTRACT_CHECKLIST_DATA,
@@ -10,8 +10,6 @@ import {
   IN_CONTRACT_CHECKLIST_DATA,
 } from './checkListConstants';
 import { ContractCheck } from './ContractCheck';
-
-export type PrecautionMenuType = (typeof PRECAUTION_MENUS)[number]['key'];
 
 export const ContractCheckList = () => {
   const [precautionMenu, setPrecautionMenu] = useState<PrecautionMenuType>('BEFORE_CONTRACT');
