@@ -37,6 +37,7 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
   --point: #ea5050;
+  --point-hover: #fff9f9;
   --bgcolor: #f5f5f5;
   --dark: #1c1b1f;
   --divider-gray: #e5e5e5;
@@ -83,6 +84,7 @@
   --color-sidebar-ring: var(--sidebar-ring);
 
   --color-point: var(--point);
+  --color-point-hover: var(--point-hover);
   --color-bgcolor: var(--bgcolor);
   --color-dark: var(--dark);
   --color-divider-gray: var(--divider-gray);

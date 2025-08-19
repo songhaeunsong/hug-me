@@ -4,9 +4,9 @@ import { ScrollToTop } from '@/components/common/ScrollToTop';
 
 export const AppLayout = () => {
   return (
-    <div className="max-w-[1150px] min-h-screen mx-auto flex justify-center">
-      <div className="max-w-[500px] shadow-2xl w-full">
-        <div className="w-full pt-[59px] bg-bgcolor h-full scrollbar-scope-none">
+    <div className="max-w-[1150px] h-screen mx-auto flex justify-center">
+      <div className="max-w-[500px] w-full bg-bgcolor h-full shadow-2xl overflow-auto">
+        <div className="w-full h-full pt-[59px]">
           <Outlet />
           <ScrollToTop />
         </div>
