@@ -1,13 +1,9 @@
-// import { useEffect, useState } from 'react';
-
-// import { type HouseType, usePostDeposit } from '@/api/Deposit';
-
 import { useState } from 'react';
 
 import type { CityType, HouseType } from '@/api/deposit';
-import { DepositHousePrice } from '@/components/DepositCheck/DepositHousePrice';
-import { DepositHouseType } from '@/components/DepositCheck/DepositHouseType';
-import { DepositResult } from '@/components/DepositCheck/DepositResult';
+import { DepositHousePrice } from '@/components/depositCheck/DepositHousePrice';
+import { DepositHouseType } from '@/components/depositCheck/DepositHouseType';
+import { DepositResult } from '@/components/depositCheck/DepositResult';
 
 type CheckState = 'HOUSE_TYPE' | 'HOUSE_PRICE' | 'RESULT';
 export const DepositCheck = () => {
