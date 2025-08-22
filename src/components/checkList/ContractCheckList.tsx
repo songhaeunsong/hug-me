@@ -20,7 +20,7 @@ export const ContractCheckList = () => {
   };
   return (
     <div className="pb-8 px-4 flex flex-col items-start gap-6">
-      <div className="grid grid-cols-3 w-full gap-2 sticky top-[109px] left-0 bg-bgcolor pt-8">
+      <div className="grid grid-cols-3 w-full gap-2 sticky top-0 left-0 bg-bgcolor pt-8">
         {PRECAUTION_MENUS.map(({ key, label }) => {
           const active = precautionMenu === key;
           return (

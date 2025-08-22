@@ -39,7 +39,7 @@ export const QuizSection = ({ quizData, totalCount, quizIndex, submitQuizAnswer 
     const quizPieces = quizData.quiz.split('*');
 
     return (
-      <div className="w-full h-full flex flex-col justify-between px-3 pb-28">
+      <div className="w-full h-full flex flex-col gap-8 justify-between px-3 pb-28">
         <div className="flex flex-col items-start gap-1 ">
           <span className="text-[14px] font-semibold text-gray-1">{QUIZ_FORM[quizData.form].label}</span>
           <div className="text-[24px] font-semibold text-start leading-8 [&>*]:align-middle">
@@ -75,7 +75,7 @@ export const QuizSection = ({ quizData, totalCount, quizIndex, submitQuizAnswer 
 
   if (QUIZ_FORM[quizData.form].type === 'ox') {
     return (
-      <div className="w-full h-full flex flex-col justify-between px-3 pb-28">
+      <div className="w-full h-full flex flex-col gap-8 justify-between px-3 pb-28">
         <div className="flex flex-col items-start gap-1 ">
           <span className="text-[14px] font-semibold text-gray-1">{QUIZ_FORM[quizData.form].label}</span>
           <span className="text-[24px] font-semibold text-start">{quizData.quiz}</span>

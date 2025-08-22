@@ -16,7 +16,7 @@ export const RiskProgress = ({ className, value, ...props }: Props) => {
     <div className="w-full flex items-center gap-1">
       <ProgressPrimitive.Root
         data-slot="progress"
-        className={cn('bg-divider-gray relative h-4 w-full overflow-hidden rounded-full', className)}
+        className={cn('z-0 bg-divider-gray relative h-4 w-full overflow-hidden rounded-full', className)}
         {...props}
       >
         <ProgressPrimitive.Indicator
@@ -25,7 +25,7 @@ export const RiskProgress = ({ className, value, ...props }: Props) => {
             props.riskStep === 'LOWER' && 'bg-green-1',
             props.riskStep === 'MIDDLE' && 'bg-yellow-1',
             props.riskStep === 'UPPER' && 'bg-point-2',
-            'h-full w-full flex-1 transition-all',
+            'z-2 h-full w-full flex-1 transition-all',
           )}
           style={{ transform: `translateX(-${100 - (value || 0)}%)` }}
         />

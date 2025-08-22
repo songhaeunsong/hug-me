@@ -58,7 +58,7 @@ export const RiskPredictionResult = ({ riskPredictionCondition, handleCloseResul
           <RiskLevel riskStep={riskStep} probability={risk.probability} />
           <hr className="border-t-[1px] border-divider-gray" />
           {risk.prediction && (
-            <div className="w-full">
+            <div className="w-full min-h-[520px]">
               {!isOpenBetterResult && (
                 <div className="relative flex justify-center items-center">
                   <Button
