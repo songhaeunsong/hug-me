@@ -24,9 +24,9 @@ export const DepositResult = ({ checkCondition, handleCloseResult }: DepositResu
   return (
     <BottomButtonLayout onClickButton={handleCloseResult} buttonText={'확인'}>
       <div className="flex flex-col pt-12 px-4 gap-18">
-        <div className="flex flex-col gap-1 text-[20px] font-semibold text-start">
+        <div className="flex flex-col gap-1 text-[20px] font-semibold items-center">
           <span>{`${checkCondition.city} ${checkCondition.district} ${checkCondition.type}`}의</span>
-          <span>매매가가 {formatMoneyKRW(checkCondition.price)}인 경우</span>
+          <span>주택가액이 {formatMoneyKRW(checkCondition.price)}인 경우</span>
         </div>
 
         <div className="flex flex-col gap-2 text-[30px] font-bold">

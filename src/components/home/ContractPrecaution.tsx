@@ -87,7 +87,7 @@ export const ContractPrecaution = ({ precautions }: PrecautionProps) => {
                                 to="/deposit-check"
                                 key={`content-${precautionIdx}-${itemIdx}-${contentIdx}`}
                               >
-                                매매가 별 적정 보증금 확인하기
+                                주택가액 별 적정 보증금 확인하기
                               </Link>
                             </>
                           );

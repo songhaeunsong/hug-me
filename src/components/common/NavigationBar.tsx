@@ -25,7 +25,7 @@ export const NavigationBar = () => {
         <div className="h-[45px]">
           <object className="pointer-events-none" data="icons/admin_panel_settings.svg" />
         </div>
-        <span>맞춤 보증 추천</span>
+        <span>보증금 점검</span>
       </Link>
     </ul>
   );
