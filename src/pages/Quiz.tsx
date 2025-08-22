@@ -17,14 +17,19 @@ export const Quiz = () => {
   };
 
   return (
-    <div className="flex flex-col h-full justify-between pt-12 pb-28 px-4">
+    <div className="flex flex-col h-full justify-between pt-12 px-4 pb-4 gap-12">
       {quizState === null && (
         <>
-          <span className="text-[24px] font-semibold">퀴즈를 통해 어떤 정보를 확인하고 싶으신가요?</span>
-          <div className="flex flex-col gap-2 w-full [&>*]:py-[37px] [&>*]:px-4 [&>*]:w-full [&>*]:text-[20px] [&>*]:text-start [&>*]:bg-white [&>*]:rounded-2xl [&>*]:cursor-pointer [&>*]:hover:drop-shadow-lg">
-            <button onClick={() => handleClickQuizState('BEFORE_CONTRACT')}>계약 전 주의사항</button>
-            <button onClick={() => handleClickQuizState('IN_CONTRACT')}>계약 중 주의사항</button>
-            <button onClick={() => handleClickQuizState('ATFER_CONTRACT')}>계약 후 주의사항</button>
+          <span className="text-[24px] text-start font-semibold wrap-words">
+            퀴즈를 통해 어떤 정보를 확인하고 싶으신가요?
+          </span>
+          <div
+            className="flex flex-col gap-4 w-full pb-28 [&>*]:py-[37px] [&>*]:px-4 [&>*]:w-full [&>*]:text-[20px] [&>*]:text-start 
+          [&>*]:bg-white [&>*]:rounded-3xl [&>*]:cursor-pointer [&>*]:border-[1.5px] [&>*]:border-bgcolor [&>*]:hover:border-point/40 [&>*]:hover:drop-shadow-glow [&>*]:hover:bg-point-hover [&>*]:hover:text-point"
+          >
+            <button onClick={() => handleClickQuizState('BEFORE_CONTRACT')}>✔️ 계약 전 주의사항을 알고 싶어요!</button>
+            <button onClick={() => handleClickQuizState('IN_CONTRACT')}>📝 계약 중 주의사항을 알고 싶어요!</button>
+            <button onClick={() => handleClickQuizState('ATFER_CONTRACT')}>🔍 계약 후 주의사항을 알고 싶어요!</button>
           </div>
         </>
       )}

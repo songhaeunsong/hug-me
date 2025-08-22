@@ -22,27 +22,24 @@ const QUIZ_FORM: Record<QuizForm, QuizFormValue> = {
 };
 
 export const QuizSection = ({ quizData, totalCount, quizIndex, submitQuizAnswer }: QuizSectionProps) => {
-  console.log(1);
   const [blinkAnswer, setBlinkAnswer] = useState('');
 
   const handleClickBlinkNext: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     if (blinkAnswer.length === 0) return;
-    console.log(quizData.answer === blinkAnswer, quizData.answer, blinkAnswer, quizIndex);
 
     submitQuizAnswer(quizData.answer === blinkAnswer, quizIndex);
     setBlinkAnswer('');
   };
 
   const handleClickOXNext = (oxAnswer: string) => {
-    console.log(quizData.answer === oxAnswer, quizData.answer, oxAnswer, quizIndex);
     submitQuizAnswer(quizData.answer === oxAnswer, quizIndex);
   };
   if (QUIZ_FORM[quizData.form].type === 'blink') {
     const quizPieces = quizData.quiz.split('*');
 
     return (
-      <div className="w-full h-full flex flex-col justify-between px-3">
+      <div className="w-full h-full flex flex-col justify-between px-3 pb-28">
         <div className="flex flex-col items-start gap-1 ">
           <span className="text-[14px] font-semibold text-gray-1">{QUIZ_FORM[quizData.form].label}</span>
           <div className="text-[24px] font-semibold text-start leading-8 [&>*]:align-middle">
@@ -78,7 +75,7 @@ export const QuizSection = ({ quizData, totalCount, quizIndex, submitQuizAnswer 
 
   if (QUIZ_FORM[quizData.form].type === 'ox') {
     return (
-      <div className="w-full h-full flex flex-col justify-between px-3">
+      <div className="w-full h-full flex flex-col justify-between px-3 pb-28">
         <div className="flex flex-col items-start gap-1 ">
           <span className="text-[14px] font-semibold text-gray-1">{QUIZ_FORM[quizData.form].label}</span>
           <span className="text-[24px] font-semibold text-start">{quizData.quiz}</span>
@@ -88,12 +85,12 @@ export const QuizSection = ({ quizData, totalCount, quizIndex, submitQuizAnswer 
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4 w-full h-[150px] [&>*]:rounded-2xl [&>*]:bg-white">
-          <button onClick={() => handleClickOXNext('O')}>
+        <div className="grid grid-cols-2 gap-4 w-full h-[150px] [&>*]:rounded-2xl">
+          <button className="bg-green-1" onClick={() => handleClickOXNext('O')}>
             <object className="pointer-events-none m-auto" data="icons/circle.svg" />
           </button>
-          <button onClick={() => handleClickOXNext('X')}>
-            <object className="pointer-events-none m-auto" data="icons/close.svg" />
+          <button className="bg-point-2" onClick={() => handleClickOXNext('X')}>
+            <object className="pointer-events-none bg-point-2  m-auto" data="icons/close.svg" />
           </button>
         </div>
       </div>
