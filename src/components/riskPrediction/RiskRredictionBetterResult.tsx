@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 
 import { type RiskPredictionCondition, usePostBetterRisk } from '@/api/riskPrediction';
 
+import { ErrorComponent } from '../common/ErrorComponent';
+import { Spinner } from '../common/Spinner';
 import { RiskPredictionDetailSection } from './RiskPredictionDetailSection';
 import type { RiskStepType } from './RiskPredictionResult';
 import { type RiskPredictionConditionKey } from './riskPredictonContants';
@@ -26,6 +28,7 @@ export type UsefulConditionType = Partial<Record<RiskPredictionConditionKey, Rec
 export const RiskPredictionBetterResult = ({ riskPredictionCondition }: RiskPredictionBetterResultProps) => {
   const postBetterRisk = usePostBetterRisk();
 
+  const [isLoading, setIsLoading] = useState(true);
   const [recommendation, setRecommendation] = useState<Recommendation | null>(null);
 
   useEffect(() => {
@@ -73,11 +76,25 @@ export const RiskPredictionBetterResult = ({ riskPredictionCondition }: RiskPred
           betterRiskStep: riskStep,
           betterRiskPercentage: percentage,
         });
+
+        setIsLoading(false);
       },
     });
   }, [riskPredictionCondition]);
 
-  if (recommendation === null) return <>분석중...</>;
+  if (isLoading)
+    return (
+      <div className="h-[450px]">
+        <Spinner text="개선 사항을 분석중이에요!" />
+      </div>
+    );
+
+  if (recommendation === null)
+    return (
+      <div className="h-[450px]">
+        <ErrorComponent goBackLink="/" />
+      </div>
+    );
 
   return <RiskPredictionDetailSection data={riskPredictionCondition} recommendation={recommendation} />;
 };

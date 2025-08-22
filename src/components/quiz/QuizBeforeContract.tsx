@@ -2,6 +2,8 @@ import { useState } from 'react';
 
 import { useGetQuizes } from '@/api/quiz';
 
+import { ErrorComponent } from '../common/ErrorComponent';
+import { Spinner } from '../common/Spinner';
 import { QuizResult } from './QuizResult';
 import { QuizSection } from './QuizSection';
 
@@ -18,14 +20,13 @@ export const QuizBeforeContract = ({ resetQuizState }: QuizBeforeContractProps) 
   const [quizInedx, setsetQuizIndex] = useState(0);
 
   const submitQuizAnswer = (isRight: boolean, index: number) => {
-    // 채점
     if (isRight) setRightQuizes((prev) => prev.map((v, i) => (i === index ? true : v)));
 
     setsetQuizIndex((prev) => prev + 1);
   };
 
-  if (isPending || isFetching) return <>문제를 생성하는 중입니다.</>;
-  if (isError) return null;
+  if (isPending || isFetching) return <Spinner text="문제를 생성중이에요!" />;
+  if (isError) return <ErrorComponent goBackLink="/" />;
 
   if (quizInedx < TOTAL_COUNT)
     return (

@@ -4,22 +4,32 @@ import { type DepositCheckCondition, usePostDeposit } from '@/api/deposit';
 import { BottomButtonLayout } from '@/layouts/BottomButtonLayout';
 import { formatMoneyKRW } from '@/utils/formatMoneyKRW';
 
+import { ErrorComponent } from '../common/ErrorComponent';
+import { Spinner } from '../common/Spinner';
+
 interface DepositResultProps {
   checkCondition: DepositCheckCondition;
   handleCloseResult: () => void;
 }
 
 export const DepositResult = ({ checkCondition, handleCloseResult }: DepositResultProps) => {
-  const [deposit, setDeposit] = useState<number>(0);
+  const [isLoading, setIsLoading] = useState(true);
+  const [deposit, setDeposit] = useState<number | null>(null);
   const postDeposit = usePostDeposit();
 
   useEffect(() => {
     postDeposit(checkCondition, {
       onSuccess: (data) => {
         setDeposit(data.averagePrice);
+
+        setIsLoading(false);
       },
     });
   }, [checkCondition]);
+
+  if (isLoading) return <Spinner text="적정보증금액을 계산 중이에요!" />;
+
+  if (deposit === null) return <ErrorComponent goBackLink="/" />;
 
   return (
     <BottomButtonLayout onClickButton={handleCloseResult} buttonText={'확인'}>

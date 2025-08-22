@@ -7,6 +7,8 @@ import {
 } from '@/api/riskPrediction';
 import { BottomButtonLayout } from '@/layouts/BottomButtonLayout';
 
+import { ErrorComponent } from '../common/ErrorComponent';
+import { Spinner } from '../common/Spinner';
 import { Button } from '../ui/button';
 import { RiskLevel } from './RiskLevel';
 import { RiskPredictionDetailSection } from './RiskPredictionDetailSection';
@@ -23,6 +25,7 @@ export type RiskStepType = 'LOWER' | 'MIDDLE' | 'UPPER' | 'NONE';
 export const RiskPredictionResult = ({ riskPredictionCondition, handleCloseResult }: RiskPredictionResultProps) => {
   const postRiskPrediction = usePostRiskPrediction();
 
+  const [isLoading, setIsLoading] = useState(true);
   const [risk, setRisk] = useState<PostRiskPredictionResponse | null>(null);
   const [isOpenBetterResult, setIsOpenBetterResult] = useState(false);
   const [riskStep, setRiskStep] = useState<RiskStepType>('NONE');
@@ -30,16 +33,23 @@ export const RiskPredictionResult = ({ riskPredictionCondition, handleCloseResul
   useEffect(() => {
     postRiskPrediction(riskPredictionCondition, {
       onSuccess: (data) => {
-        setRisk(data);
+        setRisk({
+          ...data,
+          prediction: Boolean(data.prediction),
+        });
         const percentage = data.probability;
         if (percentage <= 40) setRiskStep('LOWER');
         else if (percentage <= 70) setRiskStep('MIDDLE');
         else if (percentage <= 100) setRiskStep('UPPER');
+
+        setIsLoading(false);
       },
     });
   }, [riskPredictionCondition]);
 
-  if (risk === null) return null;
+  if (isLoading) return <Spinner text="위험도를 분석하고 있어요!" />;
+
+  if (risk === null) return <ErrorComponent goBackLink="/" />;
 
   return (
     <BottomButtonLayout onClickButton={handleCloseResult} buttonText={'확인'}>
@@ -47,7 +57,6 @@ export const RiskPredictionResult = ({ riskPredictionCondition, handleCloseResul
         <div className="bg-white rounded-2xl">
           <RiskLevel riskStep={riskStep} probability={risk.probability} />
           <hr className="border-t-[1px] border-divider-gray" />
-
           {risk.prediction && (
             <div className="w-full">
               {!isOpenBetterResult && (
