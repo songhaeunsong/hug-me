@@ -25,7 +25,7 @@ export const PrecautionList = () => {
     setPrecautionMenu(menu);
   };
   return (
-    <div className="py-8 px-4 flex flex-col items-start gap-6">
+    <div className="pt-8 pb-12 px-4 flex flex-col items-start gap-6">
       <div className="flex flex-row items-center gap-4">
         {PRECAUTION_MENUS.map(({ key, label }) => {
           const active = precautionMenu === key;
