@@ -13,7 +13,7 @@ export const ContractCheck = ({ checks }: ContractCheckProps) => {
       {checks.map((check, checkIdx) => {
         return (
           <div key={`check-${checkIdx}`} className="flex flex-col items-start gap-4 w-full">
-            <span className="font-semibold text-[16px]">{check.title}</span>
+            <span className="font-semibold text-[16px] text-start">{check.title}</span>
             <div className="flex flex-col items-start rounded-2xl bg-white w-full divide-y divide-border-1 border-divider-gray">
               {check.checkPoints.map((checkPoint, checkPointIdx) => {
                 return (

@@ -12,7 +12,7 @@ export const BottomButtonLayout = ({ children, onClickButton, buttonText }: Bott
   return (
     <div className="w-full h-full flex flex-col">
       <div className="flex-1">{children}</div>
-      <div className="sticky bottom-0 w-full p-4 pb-12">
+      <div className="sticky h-[130px] bottom-0 w-full p-4 pb-12 bg-bgcolor">
         <Button onClick={onClickButton} className="bg-point h-16 text-xl font-semibold w-full hover:bg-point/90">
           {buttonText}
         </Button>
