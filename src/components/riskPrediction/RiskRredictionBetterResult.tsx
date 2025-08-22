@@ -1,0 +1,83 @@
+import { useEffect, useState } from 'react';
+
+import { type RiskPredictionCondition, usePostBetterRisk } from '@/api/riskPrediction';
+
+import { RiskPredictionDetailSection } from './RiskPredictionDetailSection';
+import type { RiskStepType } from './RiskPredictionResult';
+import { type RiskPredictionConditionKey } from './riskPredictonContants';
+
+interface RiskPredictionBetterResultProps {
+  riskPredictionCondition: RiskPredictionCondition;
+}
+
+interface RecommendationCondition {
+  percentage: string;
+  result: number;
+}
+
+export interface Recommendation {
+  usefulConditions: Partial<Record<RiskPredictionConditionKey, RecommendationCondition>>;
+  betterRiskStep: RiskStepType;
+  betterRiskPercentage: number;
+}
+
+export type UsefulConditionType = Partial<Record<RiskPredictionConditionKey, RecommendationCondition>>;
+
+export const RiskPredictionBetterResult = ({ riskPredictionCondition }: RiskPredictionBetterResultProps) => {
+  const postBetterRisk = usePostBetterRisk();
+
+  const [recommendation, setRecommendation] = useState<Recommendation | null>(null);
+
+  useEffect(() => {
+    postBetterRisk(riskPredictionCondition, {
+      onSuccess: (data) => {
+        let riskStep: RiskStepType = 'NONE';
+        const percentage = data.recommendation.probability;
+
+        if (percentage <= 40) riskStep = 'LOWER';
+        else if (percentage <= 70) riskStep = 'MIDDLE';
+        else if (percentage <= 100) riskStep = 'UPPER';
+
+        const newUsefulConditions: UsefulConditionType = {};
+
+        if (data.recommendation.주택가액.isUseful) {
+          const recommendationCondition = data.recommendation.주택가액;
+
+          newUsefulConditions['housePrice'] = {
+            percentage: recommendationCondition.result > 0 ? '+10%' : '-10%',
+            result: recommendationCondition.result,
+          };
+        }
+
+        if (data.recommendation.임대보증금액.isUseful) {
+          const recommendationCondition = data.recommendation.임대보증금액;
+
+          newUsefulConditions['depositAmount'] = {
+            percentage: recommendationCondition.result > 0 ? '+10%' : '-10%',
+            result: recommendationCondition.result,
+          };
+        }
+
+        if (data.recommendation.선순위.isUseful) {
+          const recommendationCondition = data.recommendation.선순위;
+
+          newUsefulConditions['seniority'] = {
+            percentage: recommendationCondition.result > 0 ? '+10%' : '-10%',
+            result: recommendationCondition.result,
+          };
+        }
+
+        console.log(riskStep, percentage);
+        setRecommendation({
+          usefulConditions: newUsefulConditions,
+          betterRiskStep: riskStep,
+          betterRiskPercentage: percentage,
+        });
+      },
+    });
+  }, [riskPredictionCondition]);
+
+  if (recommendation === null) return <>분석중...</>;
+
+  return <RiskPredictionDetailSection data={riskPredictionCondition} recommendation={recommendation} />;
+};

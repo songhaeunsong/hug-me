@@ -20,6 +20,26 @@ export const CITYES: CityType[] = [
   '제주특별자치도',
 ];
 
+export const CITYES_RISK_PREDICTION_MAP = {
+  서울시: '서울',
+  경기도: '경기',
+  인천시: '인천',
+  부산시: '부산',
+  대구시: '대구',
+  광주시: '광주',
+  대전시: '대전',
+  울산시: '울산',
+  세종시: '세종',
+  강원도: '강원',
+  충청북도: '충북',
+  충청남도: '충남',
+  전라북도: '전북',
+  전라남도: '전남',
+  경상북도: '경북',
+  경상남도: '경남',
+  제주특별자치도: '제주',
+};
+
 export const HOUSE_TYPE: HouseType[] = ['아파트', '연립다세대', '단독주택'];
 
 export const DISTRICTS: Record<CityType, string[]> = {
