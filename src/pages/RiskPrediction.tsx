@@ -22,7 +22,6 @@ export type RiskPredictionType = 'AUTO' | 'INSERT';
 
 export const RiskPrediction = () => {
   const [riskPredictionState, setRiskPredictionState] = useState<RiskPredictionState>('SELECT_TYPE');
-  const [riskPredictionType, setRiskPredictionType] = useState<RiskPredictionType>('INSERT');
 
   const [housePrice, setHousePrice] = useState<number>(0);
   const [depositAmount, setDepositAmount] = useState<number>(0);
@@ -33,8 +32,6 @@ export const RiskPrediction = () => {
   const [guaranteeEndMonth, setGuaranteeEndMonth] = useState<number>(0);
 
   const handleSelectType = (selectType: RiskPredictionType) => {
-    setRiskPredictionType(selectType);
-
     if (selectType === 'INSERT') setRiskPredictionState('HOUSE_PRICE');
     else if (selectType === 'AUTO') setRiskPredictionState('FILE_UPLOAD');
   };
@@ -82,10 +79,16 @@ export const RiskPrediction = () => {
   if (riskPredictionState === 'FILE_UPLOAD')
     return <RiskPredictionFileUploader handleSubmitContractData={handleSubmitContractData} />;
   if (riskPredictionState === 'HOUSE_PRICE')
-    return <RiskPredictionHousePrice handleSubmitHousePrice={handleSubmitHousePrice} />;
+    return (
+      <RiskPredictionHousePrice
+        initialHousePrice={housePrice}
+        initialDepositAmount={depositAmount}
+        handleSubmitHousePrice={handleSubmitHousePrice}
+      />
+    );
 
   if (riskPredictionState === 'HOUSE_TYPE')
-    return <RiskPredictionHouseType handleSubmitHouseType={handleSubmitHouseType} />;
+    return <RiskPredictionHouseType initialRegion={region} handleSubmitHouseType={handleSubmitHouseType} />;
 
   if (riskPredictionState === 'HOUSE_SENIORITY')
     return <RiskPredictionHouseSeniority handleSubmitHouseSeniority={handleSubmitHouseSeniority} />;
@@ -97,7 +100,7 @@ export const RiskPrediction = () => {
     if (
       housePrice === 0 ||
       depositAmount === 0 ||
-      seniority === 0 ||
+      seniority < 0 ||
       region === null ||
       houseType === null ||
       guaranteeStartMonth === 0 ||

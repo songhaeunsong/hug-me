@@ -9,12 +9,13 @@ import { CITY_FULLNAME_RISK_PREDICTION_MAP } from '../depositCheck/regionConstan
 interface RiskPredictionOCRProps {
   handleSubmitContractData: (depositAmount: number, region: string) => void;
 }
+
 const extractContractInfo = (lines: string[]) => {
   let address = '';
-  let deposit = '';
+  let deposit = 0;
 
   let addressFound = false;
-  const depositFound = false;
+  let depositFound = false;
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
@@ -29,7 +30,8 @@ const extractContractInfo = (lines: string[]) => {
       const numMatch = nextLine.match(/W?([\d,]+)/);
 
       if (numMatch) {
-        deposit = numMatch[1].replace(/,/g, '');
+        deposit = +numMatch[1].replace(/,/g, '');
+        depositFound = true;
       }
     }
 
@@ -75,13 +77,20 @@ export const RiskPredictionOCR = ({ handleSubmitContractData }: RiskPredictionOC
           if (OCRResult === null) return;
 
           const result = extractContractInfo(OCRResult.split('\n'));
+
+          console.log(OCRResult);
+          console.log('zz');
+
+          console.log(OCRResult.split('\n'));
+
           const address = result.address;
+          const deposit = result.deposit;
 
           const addressPieces = address.split(' ');
 
           const region = CITY_FULLNAME_RISK_PREDICTION_MAP[addressPieces[0]];
 
-          handleSubmitContractData(+result.deposit, region);
+          handleSubmitContractData(+deposit, region);
         },
         onError: () => {
           setIsError(true);
@@ -114,7 +123,11 @@ export const RiskPredictionOCR = ({ handleSubmitContractData }: RiskPredictionOC
         >
           업로드
         </button>
-        {isLoading && <Spinner text="계약서 분석 중이에요!" />}
+        {isLoading && (
+          <div className="pt-12">
+            <Spinner text="계약서 분석 중이에요!" />
+          </div>
+        )}
       </div>
     </div>
   );

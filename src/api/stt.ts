@@ -1,10 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 
-interface PostSpeechResponse {
-  text: string;
-}
-
-interface PostSpeechResponse {
+export interface PostSpeechResponse {
   intent: {
     matched: true;
     function: 'risk_assessment';

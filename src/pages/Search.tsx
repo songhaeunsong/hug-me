@@ -1,19 +1,26 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-import { usePostSpeech } from '@/api/stt';
+import { type PostSpeechResponse, usePostSpeech } from '@/api/stt';
 
-export const Search = () => {
+interface SearchProps {
+  handleSearchResultFalse: () => void;
+  handleSearchResultTrue: (data: PostSpeechResponse) => void;
+}
+export const Search = ({ handleSearchResultFalse, handleSearchResultTrue }: SearchProps) => {
   const postSpeech = usePostSpeech();
   const [recording, setRecording] = useState(false);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const silenceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    handleSearchResultFalse();
+  }, [recording]);
 
   const startRecording = async () => {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
     const recorder = new MediaRecorder(stream, { mimeType: 'audio/webm' });
     let chunks: Blob[] = [];
 
-    // 🔊 AudioContext로 음성 크기 측정
     const audioContext = new AudioContext();
     const source = audioContext.createMediaStreamSource(stream);
     const analyser = audioContext.createAnalyser();
@@ -24,18 +31,15 @@ export const Search = () => {
     const checkSilence = () => {
       analyser.getByteTimeDomainData(dataArray);
 
-      // 파형 중앙(128)에서 얼마나 벗어났는지 측정 → 작으면 무음
       const volume = dataArray.reduce((acc, val) => acc + Math.abs(val - 128), 0) / dataArray.length;
 
       if (volume < 2) {
-        // 무음 구간 시작
         if (!silenceTimerRef.current) {
           silenceTimerRef.current = setTimeout(() => {
             stopRecording();
           }, 5000);
         }
       } else {
-        // 다시 소리 감지 → 타이머 초기화
         if (silenceTimerRef.current) {
           clearTimeout(silenceTimerRef.current);
           silenceTimerRef.current = null;
@@ -53,7 +57,6 @@ export const Search = () => {
       const audioBlob = new Blob(chunks, { type: 'audio/webm' });
       chunks = [];
 
-      // 서버에 전송
       sendToServer(audioBlob);
     };
 
@@ -70,6 +73,8 @@ export const Search = () => {
     postSpeech(formData, {
       onSuccess: (data) => {
         console.log('here', data);
+
+        handleSearchResultTrue(data);
       },
     });
   };
@@ -86,16 +91,12 @@ export const Search = () => {
   };
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h2>🎤 자동 제출 녹음기</h2>
-      <button onClick={recording ? stopRecording : startRecording}>{recording ? '⏹ 수동 중지' : '🎙 녹음 시작'}</button>
-
-      {/* {audioURL && (
-        <div style={{ marginTop: '20px' }}>
-          <h3>녹음된 파일</h3>
-          <audio controls src={audioURL}></audio>
-        </div>
-      )} */}
-    </div>
+    <button onClick={recording ? stopRecording : startRecording} className="w-[270px] h-[270px]">
+      {recording ? (
+        <object className="pointer-events-none" data="icons/voicebtn_active.svg" width="100%" height="100%" />
+      ) : (
+        <object className="pointer-events-none" data="icons/voicebtn.svg" width="100%" height="100%" />
+      )}
+    </button>
   );
 };

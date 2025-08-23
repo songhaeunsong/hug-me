@@ -5,12 +5,18 @@ import { BottomButtonLayout } from '@/layouts/BottomButtonLayout';
 import { formatMoneyKRW } from '@/utils/formatMoneyKRW';
 
 interface RiskPredictionHousePriceProps {
+  initialHousePrice: number;
+  initialDepositAmount: number;
   handleSubmitHousePrice: (housePrice: number, depositAmount: number) => void;
 }
 
-export const RiskPredictionHousePrice = ({ handleSubmitHousePrice }: RiskPredictionHousePriceProps) => {
-  const [housePrice, setHousePrice] = useState<string>('');
-  const [depositAmount, setDepositAmount] = useState<string>('');
+export const RiskPredictionHousePrice = ({
+  initialHousePrice,
+  initialDepositAmount,
+  handleSubmitHousePrice,
+}: RiskPredictionHousePriceProps) => {
+  const [housePrice, setHousePrice] = useState<string>(initialHousePrice.toString());
+  const [depositAmount, setDepositAmount] = useState<string>(initialDepositAmount.toString());
 
   const handleHousePriceChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = String(Number(e.target.value));

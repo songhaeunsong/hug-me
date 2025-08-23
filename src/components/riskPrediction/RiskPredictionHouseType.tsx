@@ -3,16 +3,24 @@ import { useState } from 'react';
 import type { CityType, HouseType } from '@/api/deposit';
 import { BottomButtonLayout } from '@/layouts/BottomButtonLayout';
 
-import { CITYES, CITYES_RISK_PREDICTION_MAP, HOUSE_TYPE } from '../depositCheck/regionConstants';
+import {
+  CITYES,
+  CITYES_RISK_PREDICTION_MAP,
+  HOUSE_TYPE,
+  RISK_PREDICTION_CITY_REVERSE_MAP,
+} from '../depositCheck/regionConstants';
 import { Label } from '../ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 
 interface RiskPredictionHouseTypeProps {
-  handleSubmitHouseType: (egion: string, houseType: HouseType) => void;
+  initialRegion: string;
+  handleSubmitHouseType: (region: string, houseType: HouseType) => void;
 }
 
-export const RiskPredictionHouseType = ({ handleSubmitHouseType }: RiskPredictionHouseTypeProps) => {
-  const [selectedRegion, setSelectedRegion] = useState<CityType | null>(null);
+export const RiskPredictionHouseType = ({ initialRegion, handleSubmitHouseType }: RiskPredictionHouseTypeProps) => {
+  const [selectedRegion, setSelectedRegion] = useState<CityType | null>(
+    RISK_PREDICTION_CITY_REVERSE_MAP[initialRegion],
+  );
   const [selectedType, setSelectedType] = useState<HouseType | null>(null);
 
   const handleClickbutton = () => {
@@ -32,7 +40,7 @@ export const RiskPredictionHouseType = ({ handleSubmitHouseType }: RiskPredictio
         <div className="flex flex-col w-full gap-8">
           <div className="flex flex-col w-full items-start gap-4">
             <Label className="font-semibold">지역 선택</Label>
-            <Select onValueChange={(city: CityType) => setSelectedRegion(city)}>
+            <Select value={selectedRegion || undefined} onValueChange={(city: CityType) => setSelectedRegion(city)}>
               <SelectTrigger className="w-full px-1 py-2 border-0 border-b-1 border-gray-1 text-[20px] text-dark shadow-none rounded-none">
                 <SelectValue placeholder="지역 선택" />
               </SelectTrigger>

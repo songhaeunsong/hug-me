@@ -40,7 +40,7 @@ export const CITY_FULLNAME_RISK_PREDICTION_MAP: Record<string, string> = {
   제주특별자치도: '제주',
 };
 
-export const CITYES_RISK_PREDICTION_MAP = {
+export const CITYES_RISK_PREDICTION_MAP: Record<CityType, string> = {
   서울시: '서울',
   경기도: '경기',
   인천시: '인천',
@@ -58,6 +58,26 @@ export const CITYES_RISK_PREDICTION_MAP = {
   경상북도: '경북',
   경상남도: '경남',
   제주특별자치도: '제주',
+};
+
+export const RISK_PREDICTION_CITY_REVERSE_MAP: Record<string, CityType> = {
+  서울: '서울시',
+  경기: '경기도',
+  인천: '인천시',
+  부산: '부산시',
+  대구: '대구시',
+  광주: '광주시',
+  대전: '대전시',
+  울산: '울산시',
+  세종: '세종시',
+  강원: '강원도',
+  충북: '충청북도',
+  충남: '충청남도',
+  전북: '전라북도',
+  전남: '전라남도',
+  경북: '경상북도',
+  경남: '경상남도',
+  제주: '제주특별자치도',
 };
 
 export const HOUSE_TYPE: HouseType[] = ['아파트', '연립다세대', '단독주택'];
