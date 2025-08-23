@@ -47,8 +47,8 @@ export const RiskPredictionBetterResult = ({ riskPredictionCondition }: RiskPred
           const recommendationCondition = data.recommendation.주택가액;
 
           newUsefulConditions['housePrice'] = {
-            percentage: recommendationCondition.result > 0 ? '+10%' : '-10%',
-            result: recommendationCondition.result,
+            percentage: `${Math.floor(recommendationCondition.result)}%`,
+            result: recommendationCondition.newResult,
           };
         }
 
@@ -56,8 +56,8 @@ export const RiskPredictionBetterResult = ({ riskPredictionCondition }: RiskPred
           const recommendationCondition = data.recommendation.임대보증금액;
 
           newUsefulConditions['depositAmount'] = {
-            percentage: recommendationCondition.result > 0 ? '+10%' : '-10%',
-            result: recommendationCondition.result,
+            percentage: `${Math.floor(recommendationCondition.result)}%`,
+            result: recommendationCondition.newResult,
           };
         }
 
@@ -65,8 +65,8 @@ export const RiskPredictionBetterResult = ({ riskPredictionCondition }: RiskPred
           const recommendationCondition = data.recommendation.선순위;
 
           newUsefulConditions['seniority'] = {
-            percentage: recommendationCondition.result > 0 ? '+10%' : '-10%',
-            result: recommendationCondition.result,
+            percentage: `${Math.floor(recommendationCondition.result)}%`,
+            result: recommendationCondition.newResult,
           };
         }
 

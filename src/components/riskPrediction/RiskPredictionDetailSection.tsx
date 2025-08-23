@@ -60,7 +60,6 @@ export const RiskPredictionDetailSection = ({ recommendation, data }: RiskPredic
             <span className="text-[20px] font-semibold text-start wrap-words">
               <span className="text-point">{usefulConditions.join(', ')}</span>을 변경하면 위험도가 낮아져요!
             </span>
-            <span className="text-gray-1 text-[12px]">*10% 기준으로 추론한 데이터입니다.</span>
           </div>
 
           <hr />
@@ -73,7 +72,7 @@ export const RiskPredictionDetailSection = ({ recommendation, data }: RiskPredic
             <DetailSectionUsefulPiece
               pieceKey={'housePrice'}
               percentage={recommendation.usefulConditions.housePrice.percentage}
-              value={formatMoneyKRW(+data.housePrice + recommendation.usefulConditions.housePrice.result)}
+              value={formatMoneyKRW(recommendation.usefulConditions.housePrice.result)}
             />
           ) : (
             <DetailSectionPiece pieceKey={'housePrice'} value={formatMoneyKRW(+data.housePrice)} />
@@ -83,7 +82,7 @@ export const RiskPredictionDetailSection = ({ recommendation, data }: RiskPredic
             <DetailSectionUsefulPiece
               pieceKey="depositAmount"
               percentage={recommendation.usefulConditions.depositAmount.percentage}
-              value={formatMoneyKRW(+data.depositAmount + recommendation.usefulConditions.depositAmount.result)}
+              value={formatMoneyKRW(recommendation.usefulConditions.depositAmount.result)}
             />
           ) : (
             <DetailSectionPiece pieceKey="depositAmount" value={formatMoneyKRW(+data.depositAmount)} />
@@ -93,7 +92,7 @@ export const RiskPredictionDetailSection = ({ recommendation, data }: RiskPredic
             <DetailSectionUsefulPiece
               pieceKey="seniority"
               percentage={recommendation.usefulConditions.seniority.percentage}
-              value={formatMoneyKRW(+data.seniority + recommendation.usefulConditions.seniority.result)}
+              value={formatMoneyKRW(recommendation.usefulConditions.seniority.result)}
             />
           ) : (
             <DetailSectionPiece pieceKey="seniority" value={formatMoneyKRW(+data.seniority)} />

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import type { HouseType } from '@/api/deposit';
 import { RiskPredictionFileUploader } from '@/components/riskPrediction/RiskPredictionFileUploader';
@@ -30,6 +30,18 @@ export const RiskPrediction = () => {
   const [houseType, setHouseType] = useState<HouseType | null>(null);
   const [guaranteeStartMonth, setGuaranteeStartMonth] = useState<number>(0);
   const [guaranteeEndMonth, setGuaranteeEndMonth] = useState<number>(0);
+
+  useEffect(() => {
+    if (riskPredictionState === 'SELECT_TYPE') {
+      setHousePrice(0);
+      setDepositAmount(0);
+      setSeniority(0);
+      setRegion('');
+      setHouseType(null);
+      setGuaranteeStartMonth(0);
+      setGuaranteeEndMonth(0);
+    }
+  }, [riskPredictionState]);
 
   const handleSelectType = (selectType: RiskPredictionType) => {
     if (selectType === 'INSERT') setRiskPredictionState('HOUSE_PRICE');

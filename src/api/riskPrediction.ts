@@ -16,6 +16,7 @@ export interface RiskPredictionCondition {
 interface RecommendationCondition {
   isUseful: boolean;
   result: number;
+  newResult: number;
 }
 
 interface Recommendation {

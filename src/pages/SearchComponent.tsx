@@ -61,7 +61,7 @@ export const SearchComponent = () => {
                 {searchData.intent.matched ? (
                   <div className="flex flex-col gap-3">
                     <Link to={PATH_MAP[searchData.intent.best_score]}>
-                      <Button className="bg-white hover:bg:divider-gray text-dark">
+                      <Button className="bg-white hover:bg-divider-gray/50 text-dark font-semibold">
                         {LABEL_MAP[searchData.intent.best_score]}
                       </Button>
                     </Link>
@@ -69,12 +69,12 @@ export const SearchComponent = () => {
                 ) : (
                   <div className="flex flex-col gap-3">
                     <Link to={PATH_MAP[searchData.intent.best_score]}>
-                      <Button className="bg-white hover:bg:divider-gray text-dark">
+                      <Button className="bg-white hover-bg:divider-gray/50 text-dark font-semibold">
                         {LABEL_MAP[searchData.intent.best_score]}
                       </Button>
                     </Link>
                     <Link to={PATH_MAP[searchData.intent.second_best]}>
-                      <Button className="bg-white hover:bg:divider-gray text-dark">
+                      <Button className="bg-white hover-bg:divider-gray/50 text-dark font-semibold">
                         {LABEL_MAP[searchData.intent.second_best]}
                       </Button>
                     </Link>
