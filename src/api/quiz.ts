@@ -17,7 +17,7 @@ const getQuizes = async (state: QuizState): Promise<Quiz[]> => {
   if (!res.ok) {
     throw new Error(`${res.status}`);
   }
-  return res.json();
+  return await res.json();
 };
 
 export const useGetQuizes = (state: QuizState) =>
