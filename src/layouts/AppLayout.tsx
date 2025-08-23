@@ -11,7 +11,7 @@ export const AppLayout = () => {
           <ScrollToTop />
         </div>
       </div>
-      <div className="bg-gray-500/50 flex-1 hidden lg:flex">서비스 이름 및 설명</div>
+      {/* <div className="bg-gray-500/50 flex-1 hidden lg:flex">서비스 이름 및 설명</div> */}
     </div>
   );
 };

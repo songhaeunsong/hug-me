@@ -70,7 +70,6 @@ export const RiskPredictionBetterResult = ({ riskPredictionCondition }: RiskPred
           };
         }
 
-        console.log(riskStep, percentage);
         setRecommendation({
           usefulConditions: newUsefulConditions,
           betterRiskStep: riskStep,
